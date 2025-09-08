@@ -74,20 +74,25 @@ const config = {
 		],
 	},
 	async rewrites() {
-		return [
-			{
-				source: '/ping/data-event',
-				destination: `${ANALYTICS_BASE_URL}/api/data-event`,
-			},
-			{
-				source: '/api/analytics',
-				destination: `${HASHNODE_ADVANCED_ANALYTICS_URL}/api/analytics`,
-			},
-		];
-	},
-	async redirects() {
-		return await getRedirectionRules();
-	},
-};
+  return [
+    {
+      source: '/ping/data-event',
+      destination: `${ANALYTICS_BASE_URL}/api/data-event`,
+    },
+    {
+      source: '/api/analytics',
+      destination: `${HASHNODE_ADVANCED_ANALYTICS_URL}/api/analytics`,
+    },
+    // Add the blog and docs rewrites:
+    {
+      source: '/blog/:path*',
+      destination: 'https://peercash-web.vercel.app//blog/:path*',
+    },
+    {
+      source: '/docs/:path*',
+      destination: 'https://peercash-web.vercel.app/docs/:path*',
+    },
+  ];
+},
 
 module.exports = config;
